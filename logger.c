@@ -195,7 +195,7 @@ log_logmsg(struct log_logger *ctl, int lvl, char *_msg)
 {
 	char msg[LOG_LEN_MAX];
 
-	if (!ctl || ctl->fd == -1 || *_msg) {
+	if (!ctl || ctl->fd == -1 || !_msg) {
 		return;
 	}
 
