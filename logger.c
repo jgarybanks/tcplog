@@ -204,3 +204,27 @@ log_logmsg(struct log_logger *ctl, int lvl, char *_msg)
 	buildheader(ctl);
 	writeout(ctl, msg);
 }
+
+#ifdef _T
+int
+main(int argc, char *argv[])
+{
+	struct log_logger *ctl;
+	
+	ctl = log_logopen(argv[0], "localhost", "514", LOG_LOCAL0 | LOG_ERR);
+	assert(ctl);
+	log_logmsg(ctl, 10, "Test msg lvl 10 no nl");
+	log_logmsg(ctl, 5, "Test msg lvl 5 with nl\n");
+	log_logmsg(ctl, 100, "\nTest msg lvl 100 beg nl");
+	log_logmsg(ctl, 0, "Test msg lvl 0 high 铬");
+	log_logmsg(ctl, 10, NULL);
+	log_logmsg(ctl, 10, "Test msg lvl 10 after NULL");
+	log_logmsg(ctl, -1, "Test msg lvl -1");
+	log_logmsg(NULL, 10, "Test msg NULL ctl");
+	log_logmsg(ctl, 10, "Test msg lvl 10 after NULL 2");
+	log_logclose(ctl);
+	return 0;
+}
+
+#endif /* _T */
+
