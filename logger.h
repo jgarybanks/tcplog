@@ -1,4 +1,4 @@
-#ifndef _LOG_OGGER_H
+#ifndef _LOG_LOGGER_H
 #define _LOG_LOGGER_H
 
 #define _GNU_SOURCE 1
@@ -31,21 +31,15 @@ struct log_logger {
 	int fd;
 	int pri;
 	int inc;
-	pid_t pid;			/* zero when unwanted */
-	char *hdr;			/* the syslog header (based on protocol) */
+	pid_t pid;
+	char *hdr;
 	char *tag;
 	char *server;
 	char *port;
 };
 
-#undef HAVE_NTP_GETTIME		/* force to default non-NTP */
-
-#define logger_gettimeofday(x, y)	gettimeofday(x, y)
-#define logger_xgethostname		xgethostname
-#define logger_getpid			getpid
-
 struct log_logger *log_logopen(char*, char*, char*, int);
 void log_logmsg(struct log_logger*, int, char *);
 void log_logclose(const struct log_logger*);
 
-#endif
+#endif /* _LOG_LOGGER_H */

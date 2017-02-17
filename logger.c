@@ -1,5 +1,6 @@
 #include "logger.h"
 
+
 static int
 inet_socket(const char *servername, const char *port)
 {
@@ -111,7 +112,7 @@ buildheader(struct log_logger *const ctl)
 	if (ctl->fd < 0)
 		return;
 
-	logger_gettimeofday(&tv, NULL);
+	gettimeofday(&tv, NULL);
 	if ((tm = localtime(&tv.tv_sec)) != NULL) {
 		char fmt[64];
 		const size_t i = strftime(fmt, sizeof(fmt),
